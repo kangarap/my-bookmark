@@ -61,7 +61,7 @@ app.controller('noteCtr', ['$scope', '$state', '$stateParams', '$filter', '$wind
         $("#noteedit")[0].focus();
       });
     }
-    console.log('$scope.showAddNote');
+
     // 没有选中分类，默认一个分类
     if (!$scope.currentTagId) {
       $scope.tags.forEach((tag) => {
@@ -106,10 +106,6 @@ app.controller('noteCtr', ['$scope', '$state', '$stateParams', '$filter', '$wind
 
     await post("noteAdd", note);
 
-    // 增加成功，重新获取一次备忘录
-    $scope.tags.forEach((tag) => {
-      tag.clicked = false;
-    })
     $scope.preContent = $scope.content;
     $scope.content = '';
     $scope.currentTagId = null;
@@ -310,9 +306,14 @@ app.controller('noteCtr', ['$scope', '$state', '$stateParams', '$filter', '$wind
       pageSize: 35
     };
 
+    params.tagId = tagId || $scope.currentTagId || -1;
+ /*   console.log(tagId, $scope.currentTagId, "----")
+
     if (tagId || $scope.currentTagId) {
       params.tagId = tagId || $scope.currentTagId;
-    } else if ($scope.keyword) {
+    } else */
+
+    if ($scope.keyword) {
       params.keyword = $scope.keyword;
     }
 
@@ -342,6 +343,13 @@ app.controller('noteCtr', ['$scope', '$state', '$stateParams', '$filter', '$wind
       if ($scope.totalItems == 0) {
         $(".js-note").removeClass("hidden");
       }
+
+      for (let tag of $scope.tags) {
+        if (tag.id == $scope.currentTagId) {
+          tag.noteCount = reply.count;
+          break;
+        }
+      }
     })
 
     $timeout(() => {
@@ -355,13 +363,29 @@ app.controller('noteCtr', ['$scope', '$state', '$stateParams', '$filter', '$wind
     $scope.loading = true;
     $scope.tags = [];
 
+    tags.unshift({
+      id: -1,
+      noteCount: '...',
+      clicked: false,
+      name: '全部',
+      show: 1,
+      sort: -1
+    })
+
     let find = false;
     tags.forEach((tag) => {
       if (tag.id == $scope.currentTagId) {
         find = true; // 如果是删了分类返回来，那么要重新默认选中第一个分类
       }
     })
-    if (!find) $scope.currentTagId = null;
+
+    if (!find) {
+      $scope.currentTagId = -1;
+      tags[0].clicked = true;
+    }
+
+
+    // if (!find) $scope.currentTagId = null;
 
     $timeout(() => {
       $scope.loading = false;

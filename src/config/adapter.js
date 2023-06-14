@@ -39,9 +39,11 @@ exports.model = {
     database: 'mybookmarks',
     prefix: '',
     encoding: 'utf8',
-    host: '127.0.0.1',
+    host: '10.168.2.222',
+    // host: '127.0.0.1',
     port: '3306',
-    user: 'test',
+    // user: 'test',
+    user: 'root',
     password: '123456',
     pageSize: 50,
     dateStrings: true

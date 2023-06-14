@@ -731,20 +731,20 @@ module.exports = class extends Base {
   // 新增
   async noteAddAction() {
     let note = this.post();
-    note.userId = this.ctx.state.user.id;
+    const userId = this.ctx.state.user.id;
+    note.userId = userId;
     try {
       // 没有分类的直接放未分类里面
-      if (!note.tagId) {
+      if (!note.tagId || note.tagId == -1) {
         const name = "未分类";
-        let tag = await this.model("tags").where({ name }).find();
+        let tag = await this.model("tags").where({ name,userId }).find();
         if (!think.isEmpty(tag)) {
           note.tagId = tag.id;
         } else {
-          let tagId = await this.model("tags").add({
-            userId: this.ctx.state.user.id,
+          note.tagId = await this.model("tags").add({
+            userId,
             name
           });
-          note.tagId = tagId;
         }
       }
 
@@ -788,10 +788,12 @@ module.exports = class extends Base {
       if (params.keyword) {
         where.content = ['like', `%${params.keyword}%`]
       }
-      if (params.tagId) {
+      if(params.tagId && params.tagId != -1 ) {
         where.tagId = params.tagId;
       }
+
       where.userId = this.ctx.state.user.id;
+
       let data = await this.model('notes').where(where).order("createdAt DESC").page(this.get('page'), this.get('pageSize')).countSelect();
       this.json({ code: 0, data })
     } catch (error) {

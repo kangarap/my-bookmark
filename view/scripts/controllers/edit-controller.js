@@ -1,5 +1,4 @@
 app.controller('editCtr', ['$scope', '$state', '$timeout', '$document', 'ngDialog', 'pubSubService', 'dataService', function ($scope, $state, $timeout, $document, ngDialog, pubSubService, dataService) {
-  console.log("Hello editCtr");
   var maxSelections = 3;
   var dialog = null;
   var cancelDefault = false;
@@ -89,7 +88,6 @@ app.controller('editCtr', ['$scope', '$state', '$timeout', '$document', 'ngDialo
       toastr.error('书签标题不能为空！', "错误");
       return;
     }
-    console.log("add bookmark", params);
 
     if ($scope.add) {
       let id = await post('bookmarkAdd', params);
@@ -106,7 +104,7 @@ app.controller('editCtr', ['$scope', '$state', '$timeout', '$document', 'ngDialo
 
   $scope.showAddTag = function () {
     if ($scope.tags.length < 50) {
-      console.log('showAddTag..........')
+
       $scope.newTag = "";
       dialog = ngDialog.open({
         template: './views/dialog-add-tag.html',

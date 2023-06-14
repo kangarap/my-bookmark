@@ -1,6 +1,7 @@
 <div class="ui segment js-note-card" style="padding: 14px 0px 0px 0px" ng-show="!loading || tags.length > 0">
   <div class="ui container" style="padding-left: 14px">
-    <div class="ui label" style="margin: 3px 15px 8px 0px; cursor: default" ng-class="{green:tag.clicked}" ng-repeat="tag in tags" ng-click="clickTag(tag.id)" ng-show="tag.noteCount || add">{{ tag.name }} ({{ tag.noteCount || 0 }})</div>
+    <!--    <div class="ui label" style="margin: 3px 15px 8px 0px; cursor: default" ng-class="{green:tag.clicked}" ng-repeat="tag in tags" ng-click="clickTag(tag.id)" ng-show="tag.noteCount || add">{{ tag.name }} ({{ tag.noteCount || 0 }})</div>-->
+    <div class="ui label" style="margin: 3px 15px 8px 0px; cursor: default" ng-class="{green:tag.clicked}" ng-repeat="tag in tags" ng-click="clickTag(tag.id)">{{ tag.name }} ({{ tag.noteCount || 0 }})</div>
     <div class="ui label" style="margin: 3px 15px 8px 0px; cursor: default" ng-click="showAddNote()" data-tooltip="点击添加备忘。你也可以在任意界面按快捷键A(不区分大小写)增加备忘录。">
       <i class="plus icon" style="margin-right: 0px"></i>
     </div>
@@ -31,7 +32,11 @@
     </div>
   </div>
   <div class="ui vertical segment" ng-repeat="note in notes" ng-click="noteClick(note)" ng-mouseover="setHoverNote(note)" ng-mouseleave="setHoverNote(null)" id="{{note.id}}" style="margin: 0px; padding: 10px 0px">
-    <pre class="note-content" title="单击查看详情，C复制，D删除，E编辑" style="margin: 0px; padding-left: 14px; padding-right: 14px" ng-if="!note.detail">{{ note.brief }}</pre>
+<!--  <div class="ui vertical segment" ng-repeat="note in notes" ng-click="noteClick(note)" ng-mouseover="setHoverNote(note)" ng-mouseleave="setHoverNote(null)" id="{{note.id}}" style="margin: 0px; padding: 10px 0px">-->
+    <pre class="note-content" title="单击查看详情，C复制，D删除，E编辑" style="margin: 0px; padding-left: 14px; padding-right: 14px" ng-if="!note.detail">
+      <span title="添加于{{note.createdAt}}" class="need_to_be_rendered" data-timeago="{{ note.createdAt }}"></span> ➥ {{ note.brief }}
+    </pre>
+
     <pre class="note-content" style="margin: 0px; font-size: 16px; padding: 60px 14px" ng-if="note.detail">{{ note.content }}</pre>
     <div class="ui right aligned grid" ng-show="note.detail">
       <div class="sixteen wide column" style="margin: 0px 20px 0px 0px; padding: 20px 0px 0px 0px">
@@ -56,7 +61,7 @@
   </div>
   <div style="height: 20px" ng-show="notes.length === 0"></div>
   <div class="ui grid" ng-show="totalItems>0" style="margin: 0px; padding: 0px 14px">
-    <div class="eight wide column" style="padding-top: 26px"><span ng-show="searchWord">通过搜索关键字"{{searchWord}}"(点击菜单"备忘录"重新查看所有)，</span>共找到备忘一共约{{totalItems}}个</div>
+    <div class="eight wide column" style="padding-top: 26px"><span ng-show="searchWord">通过搜索关键字"{{searchWord}}"(点击菜单"备忘录"重新查看所有)，</span>共 <strong>{{totalItems}}</strong> 个。</div>
     <div class="eight wide column">
       <pagination></pagination>
     </div>

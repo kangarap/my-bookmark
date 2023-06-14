@@ -2,32 +2,16 @@
   <div class="ui grid">
     <div class="four wide stretched column">
       <div class="ui secondary vertical pointing menu">
-        <a class="item" ng-class="{active:form[0]}" ng-click="changeForm(0)">系统设置 </a>
-        <a class="item" ng-class="{active:form[1]}" ng-click="changeForm(1)">我的信息 </a>
+        <a class="item" ng-class="{active:form[0]}" ng-click="changeForm(0)">我的信息 </a>
+        <a class="item" ng-class="{active:form[1]}" ng-click="changeForm(1)">系统设置 </a>
         <a class="item" ng-class="{active:form[2]}" ng-click="changeForm(2)">上传导出 </a>
         <a class="item" ng-class="{active:form[3]}" ng-click="changeForm(3)">网站说明 </a>
         <a class="item" ng-class="{active:form[4]}" ng-click="changeForm(4)">全局书签 </a>
-        <a class="item" ng-class="{active:form[6]}" ng-click="changeForm(6)">请喝咖啡 </a>
+<!--        <a class="item" ng-class="{active:form[6]}" ng-click="changeForm(6)">请喝咖啡 </a>-->
       </div>
     </div>
     <div class="twelve wide stretched column">
-      <form class="ui form" ng-show="form[0]">
-        <h4 class="ui horizontal divider header">重置密码</h4>
-        <div class="required field">
-          <label>原密码</label>
-          <input type="password" placeholder="" ng-model="passwordOrgin" />
-        </div>
-        <div class="required field">
-          <label>新密码</label>
-          <input type="password" placeholder="" ng-model="passwordNew1" />
-        </div>
-        <div class="required field">
-          <label>确认密码</label>
-          <input type="password" placeholder="" ng-model="passwordNew2" />
-        </div>
-        <button class="ui button" type="submit" ng-click="resetPassword()">重置密码</button>
-      </form>
-      <div class="ui four statistics" style="margin-top: 60px; margin-left: -80px" ng-show="form[1]">
+      <div class="ui four statistics" style="margin-top: 60px; margin-left: -80px" ng-show="form[0]">
         <div class="statistic">
           <div class="text value">
             {{user.createdAt.substring(0, 4)}}<br />
@@ -57,6 +41,22 @@
           <div class="label">书签数目</div>
         </div>
       </div>
+      <form class="ui form" ng-show="form[1]">
+        <h4 class="ui horizontal divider header">重置密码</h4>
+        <div class="required field">
+          <label>原密码</label>
+          <input type="password" placeholder="" ng-model="passwordOrgin" />
+        </div>
+        <div class="required field">
+          <label>新密码</label>
+          <input type="password" placeholder="" ng-model="passwordNew1" />
+        </div>
+        <div class="required field">
+          <label>确认密码</label>
+          <input type="password" placeholder="" ng-model="passwordNew2" />
+        </div>
+        <button class="ui button" type="submit" ng-click="resetPassword()">重置密码</button>
+      </form>
       <form class="ui form" ng-show="form[2]">
         <h2 class="ui dividing header">上传浏览器书签到系统</h2>
         <div id="fileuploader" style="min-width: 100px">点我上传</div>
@@ -150,19 +150,19 @@
           </tbody>
         </table>
       </div>
-      <div class="ui container js-p-info" ng-show="form[6]">
-        <h3 class="ui dividing header">赞赏说明</h3>
-        <p>1、如果你觉得我的这个系统帮助到了你，那请我喝杯咖啡吧。</p>
-        <p>2、赞赏转账的时候，请留言添加“书签赞赏”这四个汉字。</p>
-        <h3 class="ui dividing header">赞赏二维码</h3>
-        <div class="ui grid">
-          <div class="one wide column"></div>
-          <div class="five wide column">微信<img class="ui rounded left floated medium image" src="./images/wx.png" /></div>
-          <div class="two wide column"></div>
-          <div class="five wide column">支付宝<img class="ui rounded right floated medium image" src="./images/zfb.png" /></div>
-          <div class="one wide column"></div>
-        </div>
-      </div>
+<!--      <div class="ui container js-p-info" ng-show="form[6]">-->
+<!--        <h3 class="ui dividing header">赞赏说明</h3>-->
+<!--        <p>1、如果你觉得我的这个系统帮助到了你，那请我喝杯咖啡吧。</p>-->
+<!--        <p>2、赞赏转账的时候，请留言添加“书签赞赏”这四个汉字。</p>-->
+<!--        <h3 class="ui dividing header">赞赏二维码</h3>-->
+<!--        <div class="ui grid">-->
+<!--          <div class="one wide column"></div>-->
+<!--          <div class="five wide column">微信<img class="ui rounded left floated medium image" src="./images/wx.png" /></div>-->
+<!--          <div class="two wide column"></div>-->
+<!--          <div class="five wide column">支付宝<img class="ui rounded right floated medium image" src="./images/zfb.png" /></div>-->
+<!--          <div class="one wide column"></div>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </div>

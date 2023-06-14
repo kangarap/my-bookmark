@@ -297,6 +297,7 @@ app.controller('tagsCtr', ['$scope', '$filter', '$state', '$window', '$statePara
     if (tag) {
       ngDialog.close(dialog);
       await post("tagAdd", { name: tag })
+      await getTags();
     } else {
       toastr.warning('您可能没有输入分类或者输入的分类有误', "提示");
     }

@@ -1,6 +1,4 @@
 app.controller('adviceCtr', ['$scope', '$state', '$timeout', '$window', 'pubSubService', 'dataService', function ($scope, $state, $timeout, $window, pubSubService, dataService) {
-  console.log("Hello adviceCtr");
-  console.log($window.location.hostname);
   if (dataService.smallDevice()) {
     if ($window.location.hostname.indexOf("b.lucq.fun") >= 0) {
       $window.location = "http://mb.lucq.fun/#/tags";
